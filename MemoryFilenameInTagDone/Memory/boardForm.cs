@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CardClassLib;
+
 
 namespace Memory
 {
@@ -15,7 +17,16 @@ namespace Memory
         public boardForm()
         {
             InitializeComponent();
+            //CreateCards();
+            //Card[,] cardArray ={{ac,ad,ah,AS },
+            //                      {twoC,twoD,twoH,twoS },
+            //                      {jc,jd,jh,js},
+            //                      {qc,qd,qh,qs },
+            //                      {kc,kd,kh,ks } };
         }
+
+
+
 
         #region Instance Variables
         const int NOT_PICKED_YET = -1;
@@ -23,9 +34,73 @@ namespace Memory
         int firstCardNumber = NOT_PICKED_YET;
         int secondCardNumber = NOT_PICKED_YET;
         int matches = 0;
+
+        Card[,] cardArray = new Card[4, 3];
+        Card ac = new Card("a", "c");
+        Card ad = new Card("a", "d");
+        Card ah = new Card("a", "h");
+        Card AS = new Card("a", "s");
+
+        Card twoC = new Card("2", "c");
+        Card twoD = new Card("2", "d");
+        Card twoH = new Card("2", "h");
+        Card twoS = new Card("2", "s");
+
+        Card jc = new Card("j", "c");
+        Card jd = new Card("j", "d");
+        Card jh = new Card("j", "h");
+        Card js = new Card("j", "s");
+
+        Card qc = new Card("q", "c");
+        Card qd = new Card("q", "d");
+        Card qh = new Card("q", "h");
+        Card qs = new Card("q", "s");
+
+        Card kc = new Card("k", "c");
+        Card kd = new Card("k", "d");
+        Card kh = new Card("k", "h");
+        Card ks = new Card("k", "s");
+        //Card[,] cardArray ={{ac,ad,ah,AS },
+        //                      {twoC,twoD,twoH,twoS },
+        //                      {jc,jd,jh,js},
+        //                      {qc,qd,qh,qs },
+        //                      {kc,kd,kh,ks } };
         #endregion
 
         #region Methods
+        public void CreateCards()
+        {
+            //Card[,] cardArray = new Card[4, 3];
+            //Card ac = new Card("a", "c");
+            //Card ad = new Card("a", "d");
+            //Card ah = new Card("a", "h");
+            //Card AS = new Card("a", "s");
+
+            //Card twoC = new Card("2", "c");
+            //Card twoD = new Card("2", "d");
+            //Card twoH = new Card("2", "h");
+            //Card twoS = new Card("2", "s");
+
+            //Card jc = new Card("j", "c");
+            //Card jd = new Card("j", "d");
+            //Card jh = new Card("j", "h");
+            //Card js = new Card("j", "s");
+
+            //Card qc = new Card("q", "c");
+            //Card qd = new Card("q", "d");
+            //Card qh = new Card("q", "h");
+            //Card qs = new Card("q", "s");
+
+            //Card kc = new Card("k", "c");
+            //Card kd = new Card("k", "d");
+            //Card kh = new Card("k", "h");
+            //Card ks = new Card("k", "s");
+            Card[,] cardArray ={{ac,ad,ah,AS },
+                              {twoC,twoD,twoH,twoS },
+                              {jc,jd,jh,js},
+                              {qc,qd,qh,qs },
+                              {kc,kd,kh,ks } };
+        }
 
         // This method finds a picture box on the board based on it's number (1 - 20)
         // It takes an integer as it's parameter and returns the picture box controls
@@ -34,6 +109,7 @@ namespace Memory
         {
             PictureBox card = (PictureBox)this.Controls["card" + i];
             return card;
+            
         }
 
         // This method gets the filename for the image displayed in a picture box given it's number
@@ -55,39 +131,44 @@ namespace Memory
 
         // These 2 methods get the value (and suit) of the card in a given picturebox
         // Both methods take an integer as the parameter and return a string
-        private string GetCardValue(int index)
-        {
-            return GetCardFilename(index).Substring(4, 1);
-        }
+        //private string GetCardValue(int index)
+        //{
+        //    return GetCardFilename(index).Substring(4, 1);
+        //}
 
-        private string GetCardSuit(int index)
-        {
-            return GetCardFilename(index).Substring(5, 1);
-        }
+        //private string GetCardSuit(int index)
+        //{
+        //    return GetCardFilename(index).Substring(5, 1);
+        //}
 
         // TODO:  students should write this one
         private bool IsMatch(int index1, int index2)
         {
-            if (GetCardValue(index1) == GetCardValue(index2))
+           
                 return true;
-            else
-                return false;
+            ;
         }
 
         // This method fills each picture box with a filename
         private void FillCardFilenames()
         {
-            string[] values = { "a", "2", "j", "q", "k" };
-            string[] suits = { "c", "d", "h", "s" };
-            int i = 1;
+            //string[] values = { "a", "2", "j", "q", "k" };
+            //string[] suits = { "c", "d", "h", "s" };
+            //int i = 1;
 
-            for (int suit = 0; suit <= 3; suit++)
+            //for (int suit = 0; suit <= 3; suit++)
+            //{
+            //    for (int value = 0; value <= 4; value++)
+            //    {
+            //        SetCardFilename(i, "card" + values[value] + suits[suit] + ".jpg");
+            //        i++;
+            //    }
+            //}
+            int i = 1;
+            foreach (Card card in cardArray)
             {
-                for (int value = 0; value <= 4; value++)
-                {
-                    SetCardFilename(i, "card" + values[value] + suits[suit] + ".jpg");
-                    i++;
-                }
+                SetCardFilename(i,"card" + card + ".jpg");
+                i++;
             }
         }
 

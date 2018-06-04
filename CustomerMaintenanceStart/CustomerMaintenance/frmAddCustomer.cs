@@ -14,17 +14,42 @@ namespace CustomerMaintenance
     // "Murach's C# 2010" by Joel Murach
     // (c) 2010 by Mike Murach & Associates, Inc. 
     // www.murach.com
-
+    //double check this stuff may need to add to list?
+    //compare to product maint or lecture notes p54
     public partial class frmAddCustomer : Form
     {
         public frmAddCustomer()
         {
             InitializeComponent();
+            
+        }
+
+        private Customer customer = null;
+
+        public Customer GetNewCustomer()
+        {
+            this.ShowDialog();
+            return customer;
+
+        }
+        private bool IsValidData()
+        {
+            return Validator.IsPresent(txtFirstName) &&
+              Validator.IsPresent(txtLastName) &&
+              Validator.IsPresent(txtEmail) &&
+              Validator.IsValidEmail(txtEmail);
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            if(IsValidData())
+            {
+               
+                customer = new Customer(txtFirstName.Text, txtLastName.Text, txtEmail.Text);
+                
+                this.Close();
+            }
         }
 
     
